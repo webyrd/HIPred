@@ -18285,4 +18285,4 @@ RPS4Y2	0.111908376216888
                    #f]
                   [else #t])))))))
 
-(lookup-genes '(NGLY1 BRCA2 MAPKAP1))
+(lookup-genes '(NGLY1 AC018816.3 BRCA2 APITD1-CORT MAPKAP1))
