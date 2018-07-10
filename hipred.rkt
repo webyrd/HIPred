@@ -18267,14 +18267,22 @@ RPS4Y2	0.111908376216888
     (let ((genes/probs (map (lambda (gene)
                               (let ((g/p (assq gene hipred-alist)))
                                 (if (equal? g/p #f)
-                                    (error 'lookup-genes "gene ~s does not appear in the hipred list\n" gene)
+                                    (list gene 'unknown (format "gene ~s does not appear in the hipred list" gene))
                                     (let ((g (car g/p))
                                           (p (cdr g/p)))
                                       (list g p (if (> p 0.5) 'haploinsufficient 'haplosufficient))))))
                             genes)))
       (sort genes/probs
             (lambda (e1 e2)
-              (> (cadr e1)
-                 (cadr e2)))))))
+              (let ((p1 (cadr e1))
+                    (p2 (cadr e2)))
+                (cond
+                  [(and (number? p1) (number? p2))
+                   (> p1 p2)]
+                  [(number? p1)
+                   #t]
+                  [(number? p2)
+                   #f]
+                  [else #t])))))))
 
 (lookup-genes '(NGLY1 BRCA2 MAPKAP1))
