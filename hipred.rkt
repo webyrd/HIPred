@@ -1,5 +1,12 @@
 #lang racket
 
+(require
+ )
+
+(provide
+  (all-defined-out))
+
+
 ;; HIPred Racket code to lookup multiple genes and sort by HIPred probability
 
 ;; For example,
@@ -18285,4 +18292,26 @@ RPS4Y2	0.111908376216888
                    #f]
                   [else #t])))))))
 
-(lookup-genes '(NGLY1 AC018816.3 BRCA2 APITD1-CORT MAPKAP1))
+(define save-as-tab-delimited
+  (lambda (file-name results)
+    (define out (open-output-file file-name))
+    (for-each
+      (lambda (result)
+        (for-each
+          (lambda (x)
+            (fprintf out "~a\t" x))
+          result)
+        (newline out))
+      results)
+    (close-output-port out)))
+
+;; (lookup-genes '(NGLY1 AC018816.3 BRCA2 APITD1-CORT MAPKAP1))
+;; (lookup-genes '(MET ERCC6L))
+;; (lookup-genes '(PRDX1))
+;; (lookup-genes '(EDA2R))
+
+#|
+(save-as-tab-delimited
+ "out.tsv"
+ (lookup-genes '(NGLY1 AC018816.3 BRCA2 APITD1-CORT MAPKAP1)))
+|#
