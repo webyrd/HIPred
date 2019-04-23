@@ -1,5 +1,10 @@
 # HIPred
 
+Simple Racket code for looking up HIPred scores for gene haploinsufficiency.
+
+*** For research purposes only ***
+
+
 HIPred scores for each gene in the human genome are listed in <i>HIPred.tsv</i>.
 
 ### Interpretation
